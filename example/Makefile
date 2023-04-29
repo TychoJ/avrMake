@@ -1,7 +1,7 @@
 # makefile.xmega.mk
 # ^^^^^^^^^^^^^^^^^
-# Author : TychoJ 
-# Versie : 0.1
+# Author  : TychoJ 
+# Version : 0.1
 # 
 # Inspired by : Edwin Boer
 #

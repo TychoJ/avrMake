@@ -1,7 +1,7 @@
-# makefile.xmega.mk
+# make.avr.mk
 # ^^^^^^^^^^^^^^^^^
-# Author : TychoJ
-# Versie : 0.1
+# Author  : TychoJ
+# Version : 0.1
 # 
 # Inspired by : Edwin Boer
 #
@@ -19,7 +19,7 @@ INCLUDELIST := $(foreach dir, $(EXTFOLDER), -I$(dir))
 # Generate a list of source code files relative of the source folder
 CLIST       :=  $(call rwildcard,$(SRCFOLDER),*.c)
 # Generate a list of library files
-EXTLIST     := $(foreach dir, $(EXTFOLDER), $(wildcard $(SRCFOLDER)$(dir)/*.c))
+EXTLIST     := $(foreach dir, $(EXTFOLDER), $(call rwildcard,$(dir),*.c))
 # Generate a list of object files
 OBJLIST     := $(patsubst %.c, %.o, $(CLIST)) $(patsubst %.c, %.o, $(EXTLIST))
 # Generate a list of object files in the object(sub)folder
