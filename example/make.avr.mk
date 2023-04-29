@@ -9,10 +9,15 @@
 # Contains  : The make process for building/flashing/debuging of AVR microcontrollers
 #			  The settings for this make file can be found in: Makefile
 
+# From stackoverflow https://stackoverflow.com/a/12959764/16373649
+# Make does not offer a recursive wildcard function, so here's one:
+rwildcard=$(wildcard $1$2) $(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2))
+# End from stackoverflow https://stackoverflow.com/a/12959764/16373649
+
 # Generate a list of folders to be included
 INCLUDELIST := $(foreach dir, $(EXTFOLDER), -I$(dir))
 # Generate a list of source code files relative of the source folder
-CLIST       := $(foreach file, $(SOURCE), $(SRCFOLDER)$(file))
+CLIST       :=  $(call rwildcard,$(SRCFOLDER),*.c)
 # Generate a list of library files
 EXTLIST     := $(foreach dir, $(EXTFOLDER), $(wildcard $(SRCFOLDER)$(dir)/*.c))
 # Generate a list of object files
