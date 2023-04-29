@@ -20,9 +20,9 @@ AVRFOLDER =
 DUDEFOLDER = 
 
 # Project name
-PROJECTNAME = blink
+PROJECTNAME = 
 # The AVR microcontroller 
-MICROCONTROLLER = atxmega256a3u
+MICROCONTROLLER = 
 # The AVR programmer (o.a. avrisp2 and )
 # avrisp2	      Atmel AVR ISP mkII
 # atmelice	      Atmel-ICE (ARM/AVR) in JTAG mode
@@ -30,7 +30,7 @@ MICROCONTROLLER = atxmega256a3u
 # atmelice_isp	  Atmel-ICE (ARM/AVR) in ISP mode
 # atmelice_pdi	  Atmel-ICE (ARM/AVR) in PDI mode
 # atmelice_updi   Atmel-ICE (ARM/AVR) in UPDI mode
-PROGRAMMER = atmelice_isp
+PROGRAMMER = 
 # The (optional) port of the avr programmer (usb, /dev/tty.#)
 # PORT = usb
 # The fuse values: low, high and extended
@@ -39,7 +39,7 @@ FUSELOW  =
 FUSEHIGH = 
 FUSEEXT  = 
 # source code (without external libraries)
-SOURCE = blink.c
+SOURCE = 
 # External source code library folders
 EXTFOLDER = 
 # Compiler flags
