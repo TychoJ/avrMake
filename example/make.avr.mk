@@ -44,15 +44,16 @@ _start:
 _help1: 
 	@echo "_________________________________"
 	@echo "  > Possible options:"
-	@echo "    make        := Show this help message."
-	@echo "    make help   := Show this help message."
-	@echo "    make all    := Compile and link the source code."
-	@echo "    make flash  := Compile and link the source code and write the compiled hex-file to"
-	@echo "                   the flash memory of the microcontroller"
-	@echo "    make test   := Test the connection between the programmer and the microcontroller."
-	@echo "    make fuse   := Write the fuse bytes to the mircrocontroller."
-	@echo "    make disasm := Disassemble the code for debugging."
-	@echo "    make clean  := Delete all generated .hex, .elf, and .o files."
+	@echo "    make        		:= Show this help message."
+	@echo "    make help   		:= Show this help message."
+	@echo "    make all    		:= Compile and link the source code."
+	@echo "    make flash  		:= Compile and link the source code and write the compiled hex-file to"
+	@echo "                   	   the flash memory of the microcontroller"
+	@echo "    make test   		:= Test the connection between the programmer and the microcontroller."
+	@echo "    make fuse   		:= Write the fuse bytes to the mircrocontroller."
+	@echo "    make disasm 		:= Disassemble the code for debugging."
+	@echo "    make clean  		:= Delete all generated .hex, .elf, and .o files."
+	@echo "	   make distclean 	:= Delete all generated .hex, .elf and .o files as wel as the $(BINFOLDER) and the $(OBJFOLDER) folders."
 	
 _end:
 	@echo
@@ -114,6 +115,16 @@ _clean:
 	rm -f    $(BINFOLDER)$(PROJECTNAME).hex 
 	rm -f    $(BINFOLDER)$(PROJECTNAME).elf
 	rm -f -r $(OBJFOLDER)$(SRCFOLDER)
+
+distclean: _start _distclean _end
+
+_distclean:
+	@echo "  > Goal: Delete all generated .hex, .elf and .o files as wel as the $(BINFOLDER) and the $(OBJFOLDER) folders."
+	rm -f    $(BINFOLDER)$(PROJECTNAME).hex 
+	rm -f    $(BINFOLDER)$(PROJECTNAME).elf
+	rm -f -r $(OBJFOLDER)$(SRCFOLDER)
+	rm -r 	 $(OBJFOLDER)
+	rm -r 	 $(BINFOLDER)
 
 # Create specific file formats
 $(BINFOLDER)$(PROJECTNAME).hex: $(BINFOLDER)$(PROJECTNAME).elf
