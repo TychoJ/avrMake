@@ -38,8 +38,6 @@ PROGRAMMER = atmelice_isp
 FUSELOW  = 
 FUSEHIGH = 
 FUSEEXT  = 
-# source code (without external libraries)
-SOURCE = blink.c
 # External source code library folders
 EXTFOLDER = 
 # Compiler flags

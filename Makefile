@@ -38,8 +38,6 @@ PROGRAMMER =
 FUSELOW  = 
 FUSEHIGH = 
 FUSEEXT  = 
-# source code (without external libraries)
-SOURCE = 
 # External source code library folders
 EXTFOLDER = 
 # Compiler flags
