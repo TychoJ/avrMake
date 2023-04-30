@@ -56,3 +56,61 @@ $ pacman -S mingw-w64-x86_64-avrdude
 
 
 # Usage
+To make use of this make file system the project should have the following structure:
+```
+
+├── make.avr.mk
+├── Makefile
+├── libs
+│   ├── a
+│   ├── b
+│   └── c
+└── src
+    ├── blink.c
+    └── subdir
+```
+The libs folder is not necessary but can be used to differentiate between libraries that are written to be used within multiple projects and libraries specifically written for the current application.
+
+The main advantage is when using git submodules for libraries that are written to be used for multiple projects is that now all the git submodules can be placed at one location.
+
+As the second step in setting up the project change `[your project name]` the your own project name (this can be anything but there should be no spaces in the project name) 
+```makefile
+# Project name
+PROJECTNAME = [your project name]
+```
+
+Add the name of the AVR microcontroller at `[avr microcontroller]`. See the avr-libc [user manual](https://www.nongnu.org/avr-libc/user-manual/using_tools.html) if you don't know what the correct name is of your AVR microcontroller. The name can be found under the `-mmcu` flag and is the `MCU name` column. 
+```makefile
+# The AVR microcontroller 
+MICROCONTROLLER = [avr microcontroller]
+```
+
+To build the project go to the project directory with the terminal in linux/mac and on windows go to the project directory with the minggw64 shell. The `make all` command will compile and link the source code.
+```console
+foo@bar: ~/pathToProject/ $ make all
+```
+
+The `make test` command will test the connection between the programmer and the microcontroller 
+```console
+foo@bar: ~/pathToProject/ $ make test
+```
+
+The `make flash` command will compile and link the source code and write the compiled hex-file to the flash memory of the microcontroller.
+```console
+foo@bar: ~/pathToProject/ $ make flash
+```
+
+The `make clean` command will delete all generated .hex, .elf, and .o files.
+```console
+foo@bar: ~/pathToProject/ $ make clean
+```
+
+The `make distclean` command will delete all generated .hex, .elf and .o files as wel as the `$(BINFOLDER)` and the `$(OBJFOLDER)` folders.
+```console
+foo@bar: ~/pathToProject/ $ make distclean
+```
+
+For more information ruen `make help`
+```console
+foo@bar: ~/pathToProject/ $ make help
+```
