@@ -110,7 +110,7 @@ The `make distclean` command will delete all generated .hex, .elf and .o files a
 foo@bar: ~/pathToProject/ $ make distclean
 ```
 
-For more information ruen `make help`
+For more information run `make help`
 ```console
 foo@bar: ~/pathToProject/ $ make help
 ```
