@@ -10,8 +10,8 @@ To make use of these make files some dependencies must be installed first.
 
 ## Installing the newest version of avrdude
 
-To install the newest version of avrdude you can go to the following link:[Avrdude Build/Installation Guide](https://github.com/avrdudes/avrdude/wiki/Building-AVRDUDE-for-Linux)
-This might be nessesary depending on your programmer, for MPLap snap usage you'll have to visit the link and update your avrdude.
+To install the newest version of avrdude you can go to the following link: [Avrdude Build/Installation Guide](https://github.com/avrdudes/avrdude/wiki/Building-AVRDUDE-for-Linux)
+This might be nessesary depending on your programmer, for MPLAB SNAP usage you'll have to visit the link and update your avrdude.
 After installation you'll need to restart your WSL by using in your PowerShell:
 ```
 wsl --shutdown
@@ -38,8 +38,17 @@ Download avrdude [from gnu](http://download.savannah.gnu.org/releases/avrdude/),
 
 ## Windows WSL (Windows Subsystem for Linux)
 
-For WSL of this AVR Makefile you'll need to be running WSL version 2 and a Windows 11 build 22000 or later. Windows 10 works but is not fully supported by Microsoft.
-In this example we are using Ubuntu 22.04.02 LTS
+For WSL of this AVR Makefile you'll need to be running WSL version 2 and a Windows 11 build 22000 or later. Windows 10 works, but is not fully supported by Microsoft.
+In this example we are using WSL2 with Ubuntu 22.04.02 LTS.
+
+To check your WSL version use the following command in PowerShell:
+```PowerShell
+wsl -l -v
+```
+To check your Windows version run the following command in PowerShell:
+```PowerShell
+Get-ComputerInfo | select OsBuildNumber
+```
 
 ### Adding USB support to WSL
 First we'll have to Install the USBIPD-WIN project to add support of USB devices to WSL.
@@ -70,7 +79,7 @@ and/or the following command within WSL:
 lsusb
 ```
 
-More in depth USB device configuration tutorial can be found on on the official microsoft website: [Connect USB devices WSL](https://learn.microsoft.com/en-us/windows/wsl/connect-usb)  
+More in depth USB WSL tutorial can be found on the official Microsoft website: [Connect USB devices WSL](https://learn.microsoft.com/en-us/windows/wsl/connect-usb)  
 
 #### Programming with WSL problems
 
@@ -83,12 +92,14 @@ Paste the following line in the created file:
 ```bash
 SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", IMPORT{builtin}="usb_id", IMPORT{builtin}="hwdb --subsystem=usb", MODE="0666"
 ```
+
 This ensures that a normal (non-root) user can use the USB.
+
 After creating the file you can restart the udev service with:
 ```bash
 sudo service udev restart
 ```  
-This sould complete the WSL installation and you can configure and use the Makefile. 
+This should complete the WSL installation and you can configure and use the Makefile. 
 
 
 ## Windows without WSL
