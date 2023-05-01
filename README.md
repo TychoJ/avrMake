@@ -57,7 +57,7 @@ To do this you'll need to run Windows PowerShell (As Administrator), in Windows 
 ```PowerShell
 winget install --interactive --exact dorssel.usbipd-win
 ```
-This will intall USBIPD on your windows machine.
+This will install USBIPD on your windows machine.
 If you leave out --interactive, winget may immediately restart your computer if that is required to install the drivers. After installation you'll have to restart your device for USBIPD to work. 
 
 After the restart you can use the following command in PowerShell (As Administrator):
@@ -69,7 +69,7 @@ This will show you all connected USB devices and their Bus ID's. You can use the
 usbipd wsl attach --busid <busid>
 ```
 Please note that WSL should be running for this command to work.
-You'll have to use this command every time you restart WSL or replug your programmer. 
+You'll have to use this command every time you restart WSL or replug your programmer.     
 To confirm the the device is now attached in linux you can run the following command on Windows: 
 ```PowerShell 
 usbipd wsl list
@@ -83,7 +83,7 @@ More in depth USB WSL tutorial can be found on the official Microsoft website: [
 
 #### Programming with WSL problems
 
-Sadly if you try and use the makefile after folling the steps found in ``Adding USB support to WSL``, avrdude will give you an error. To fix this you'll have to do a few extra steps. 
+Sadly if you try and use the makefile after following the steps found in ``Adding USB support to WSL``, avrdude will give you an error. To fix this you'll have to do a few extra steps.   
 Start with creating a new udev rule by running:
 ```bash
 nano /etc/udev/rules.d/10-local.rules
