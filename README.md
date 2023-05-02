@@ -8,6 +8,7 @@ A make script to compile source code for avr microcontrollers and program avr mi
 		2. [avrdude](#linuxAvrdude)
 	2. [MAC](#Mac)
 	3. [Windows](#Windows)
+2. [Usage](#Usage)
 
 <div id="Installation"/>
 
@@ -106,6 +107,7 @@ user@pcName MINGW64 ~
 $ pacman -S mingw-w64-x86_64-avrdude
 ```
 
+<div id="Usage"/>
 
 # Usage
 To make use of this make file system the project should have the following structure:
