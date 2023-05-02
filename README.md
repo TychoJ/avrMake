@@ -9,15 +9,50 @@ To make use of these make files some dependencies must be installed first.
 * avrdude
 
 ## Linux
-Download the AVR 8-Bit toolchain for linux from [microchips website](https://www.microchip.com/en-us/tools-resources/develop/microchip-studio/gcc-compilers)
 
-Extract the downloaded tar.gz file and add `avr8-gnu-toolchain-linux_x86_64/bin` to the system `$PATH` variable.
+### AVR 8-Bit toolchain
+The AVR 8-Bit toolchain for linux can be downloaded from [microchips website](https://www.microchip.com/en-us/tools-resources/develop/microchip-studio/gcc-compilers). 
+The downloaded file is a tar.gz file containing the AVR 8-Bit toolchain. </br>
+Extract the downloaded tar.gz file and place `avr8-gnu-toolchain-linux_x86_64/` in the  `/opt/` directory. </br>
+Now add `/opt/avr8-gnu-toolchain-linux_x86_64/bin` to the system `$PATH` variable.
 
-Download avrdude
+To check if the toolchain is installed correct run:
 ```console
-foo@bar: sudo apt install avrdude
+foo@bar: ~ $ avr-gcc --version
 ```
+This should output the following:
+```console
+avr-gcc (GCC) <VERSION>
+Copyright (C) 2015 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+```
+where `<VERSION>` is the version of avr-gcc.
 
+### avrdude
+Install avrdude with:
+```console
+foo@bar: ~ $ sudo apt install avrdude
+```
+To check if avrdude is installed correctly run:
+```console
+foo@bar: ~ $ avrdude -v
+```
+This should output the following
+```console
+avrdude: Version <VERSION>
+         Copyright (c) 2000-2005 Brian Dean, http://www.bdmicro.com/
+         Copyright (c) 2007-2014 Joerg Wunsch
+
+         System wide configuration file is "/etc/avrdude.conf"
+         User configuration file is "/home/tychoj/.avrduderc"
+         User configuration file does not exist or is not a regular file, skipping
+
+
+avrdude: no programmer has been specified on the command line or the config file
+         Specify a programmer using the -c option and try again
+```
+where `<VERSION>` is the version of avrdude.
 
 ## Mac
 Download the AVR 8-Bit toolchain for mac from [microchips website](https://www.microchip.com/en-us/tools-resources/develop/microchip-studio/gcc-compilers)
