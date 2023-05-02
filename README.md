@@ -9,6 +9,8 @@ A make script to compile source code for avr microcontrollers and program avr mi
 	2. [MAC](#Mac)
 	3. [Windows](#Windows)
 2. [Usage](#Usage)
+3. [Known issues](#knownIssues)
+	1. [ATtiny](#knownIssuesATtiny)
 
 <div id="Installation"/>
 
@@ -168,10 +170,12 @@ For more information run `make help`
 ```console
 foo@bar: ~/pathToProject/ $ make help
 ```
-
+<div id="knownIssues"/>
 # Known issues
 
 Some known problems are described here. Some of these problems are not a problem with this tool but with the dependencies of this tool.
+
+<div id="knownIssuesATtiny"/>
 
 ## ATtiny
 Some ATtiny chips are not (yet) known by libc and require the downloading of extra files. These files can be found at [Microchips website](http://packs.download.atmel.com/).
