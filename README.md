@@ -19,6 +19,7 @@ To make use of these make files some dependencies must be installed first.
 
 * AVR 8-Bit toolchain
 * avrdude
+* make
 
 <div id="Linux"/>
 
