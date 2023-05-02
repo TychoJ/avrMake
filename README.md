@@ -49,6 +49,7 @@ To check your Windows version run the following command in PowerShell:
 ```PowerShell
 Get-ComputerInfo | select OsBuildNumber
 ```
+This will only show version 22000+ if you are on Windows 11. 
 
 ### Adding USB support to WSL
 First we'll have to Install the USBIPD-WIN project to add support of USB devices to WSL.
@@ -60,7 +61,16 @@ winget install --interactive --exact dorssel.usbipd-win
 This will install USBIPD on your windows machine.
 If you leave out --interactive, winget may immediately restart your computer if that is required to install the drivers. After installation you'll have to restart your device for USBIPD to work. 
 
-After the restart you can use the following command in PowerShell (As Administrator):
+Run the following commands to add USBIP tools and hardware database in WSL:
+```bash
+sudo apt install linux-tools-generic hwdata
+```
+```bash
+sudo update-alternatives --install /usr/local/bin/usbip usbip /usr/lib/linux-tools/*-generic/usbip 20
+```
+
+
+You can use the following command in PowerShell (As Administrator) to see a list of connected devices:
 ```PowerShell
 usbipd wsl list
 ```
@@ -86,7 +96,7 @@ More in depth USB WSL tutorial can be found on the official Microsoft website: [
 Sadly if you try and use the makefile after following the steps found in ``Adding USB support to WSL``, avrdude will give you an error. To fix this you'll have to do a few extra steps.   
 Start with creating a new udev rule by running:
 ```bash
-nano /etc/udev/rules.d/10-local.rules
+sudo nano /etc/udev/rules.d/10-local.rules
 ```
 Paste the following line in the created file:
 ```bash
