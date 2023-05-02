@@ -3,6 +3,10 @@ A make script to compile source code for avr microcontrollers and program avr mi
 
 # Table of contents
 1. [Installation](#Installation)
+	1. [Linux](#Linux)
+		1. [AVR 8-Bit toolchain](#avr8bitToolchain)
+		2. [avrdude](#linuxAvrdude)
+
 
 <div id="Installation"/>
 
@@ -12,7 +16,11 @@ To make use of these make files some dependencies must be installed first.
 * AVR 8-Bit toolchain
 * avrdude
 
+<div id="Linux"/>
+
 ## Linux
+
+<div id="avr8bitToolchain"/>
 
 ### AVR 8-Bit toolchain
 The AVR 8-Bit toolchain for linux can be downloaded from [microchips website](https://www.microchip.com/en-us/tools-resources/develop/microchip-studio/gcc-compilers). 
@@ -32,6 +40,8 @@ This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ```
 where `<VERSION>` is the version of avr-gcc.
+
+<div id="linuxAvrdude"/>
 
 ### avrdude
 Install avrdude with:
