@@ -6,6 +6,7 @@ A make script to compile source code for avr microcontrollers and program avr mi
 	1. [Linux](#Linux)
 		1. [AVR 8-Bit toolchain](#avr8bitToolchain)
 		2. [avrdude](#linuxAvrdude)
+		3. [make](#linuxMake)
 	2. [MAC](#Mac)
 	3. [Windows](#Windows)
 2. [Usage](#Usage)
@@ -72,6 +73,28 @@ avrdude: no programmer has been specified on the command line or the config file
          Specify a programmer using the -c option and try again
 ```
 where `<VERSION>` is the version of avrdude.
+
+<div id="linuxMake"/>
+
+### make
+Install make with:
+```console
+foo@bar: ~ $ sudo apt install make
+```
+To check if make is installed correctly run:
+```console
+foo@bar: ~ $ make --version
+```
+This should output the following:
+```console
+GNU Make <VERSION>
+Built for x86_64-pc-linux-gnu
+Copyright (C) 1988-2020 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+```
+Where `<VERSION> is the version of make.
 
 <div id="Mac"/>
 
