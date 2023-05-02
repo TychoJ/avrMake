@@ -1,6 +1,10 @@
 # avrMake
 A make script to compile source code for avr microcontrollers and program avr microcontrollers
 
+# Table of contents
+1. [Installation](#Installation)
+
+<div id="Installation"/>
 
 # Installation
 To make use of these make files some dependencies must be installed first.
@@ -150,7 +154,7 @@ For more information run `make help`
 foo@bar: ~/pathToProject/ $ make help
 ```
 
-# Known problems
+# Known issues
 
 Some known problems are described here. Some of these problems are not a problem with this tool but with the dependencies of this tool.
 
