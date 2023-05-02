@@ -149,3 +149,56 @@ For more information run `make help`
 ```console
 foo@bar: ~/pathToProject/ $ make help
 ```
+
+# Known problems
+
+Some known problems are described here. Some of these problems are not a problem with this tool but with the dependencies of this tool.
+
+## ATtiny
+Some ATtiny chips are not (yet) known by libc and require the downloading of extra files. These files can be found at [Microchips website](http://packs.download.atmel.com/).
+Download the `Atmel ATtiny Series Device Support` file is a zip file eventhough it has the file extension `.atpack`.
+
+Make a temporary folder in which the `Atmel.ATtiny_DFP.2.0.368.atpack` zip archive can be extracted. and run the following commands 
+(These are the commands on linux for when `avr8-gnu-toolchain-linux_x86_64/` is installed in the `/opt/` directory)
+```console
+foo@bar: ~/Downloads/tmp/ $ sudo cp include/avr/iotn?*1[2467].h /opt/avr8-gnu-toolchain-linux_x86_64/avr/include/avr/
+
+foo@bar: ~/Downloads/tmp/ $ sudo cp gcc/dev/attiny?*1[2467]/avrxmega3/*.{o,a} /opt/avr8-gnu-toolchain-linux_x86_64/avr/lib/avrxmega3/
+
+foo@bar: ~/Downloads/tmp/ $ sudo cp gcc/dev/attiny?*1[2467]/avrxmega3/short-calls/*.{o,a} /opt/avr8-gnu-toolchain-linux_x86_64/avr/lib/avrxmega3/short-calls/
+```
+At last `/opt/avr8-gnu-toolchain-linux_x86_64/avr/include/avr/io.h` add the following:
+```c
+#elif defined (__AVR_ATtiny212__)
+#  include <avr/iotn212.h>
+#elif defined (__AVR_ATtiny412__)
+#  include <avr/iotn412.h>
+#elif defined (__AVR_ATtiny214__)
+#  include <avr/iotn214.h>
+#elif defined (__AVR_ATtiny414__)
+#  include <avr/iotn414.h>
+#elif defined (__AVR_ATtiny814__)
+#  include <avr/iotn814.h>
+#elif defined (__AVR_ATtiny1614__)
+#  include <avr/iotn1614.h>
+#elif defined (__AVR_ATtiny3214__)
+#  include <avr/iotn3214.h>
+#elif defined (__AVR_ATtiny416__)
+#  include <avr/iotn416.h>
+#elif defined (__AVR_ATtiny816__)
+#  include <avr/iotn816.h>
+#elif defined (__AVR_ATtiny1616__)
+#  include <avr/iotn1616.h>
+#elif defined (__AVR_ATtiny3216__)
+#  include <avr/iotn3216.h>
+#elif defined (__AVR_ATtiny417__)
+#  include <avr/iotn417.h>
+#elif defined (__AVR_ATtiny817__)
+#  include <avr/iotn817.h>
+#elif defined (__AVR_ATtiny1617__)
+#  include <avr/iotn1617.h>
+#elif defined (__AVR_ATtiny3217__)
+#  include <avr/iotn3217.h>
+```
+
+A big thank you goes to LeoNerd who wrote [this article](http://leonerds-code.blogspot.com/2019/06/building-for-new-attiny-1-series-chips.html) on how to add ATtiny support.
