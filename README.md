@@ -1,6 +1,18 @@
 # avrMake
 A make script to compile source code for avr microcontrollers and program avr microcontrollers
 
+# Table of contents
+1. [Installation](#Installation)
+	1. [Linux](#Linux)
+		1. [AVR 8-Bit toolchain](#avr8bitToolchain)
+		2. [avrdude](#linuxAvrdude)
+	2. [MAC](#Mac)
+	3. [Windows](#Windows)
+2. [Usage](#Usage)
+3. [Known issues](#knownIssues)
+	1. [ATtiny](#knownIssuesATtiny)
+
+<div id="Installation"/>
 
 # Installation
 To make use of these make files some dependencies must be installed first.
@@ -8,7 +20,11 @@ To make use of these make files some dependencies must be installed first.
 * AVR 8-Bit toolchain
 * avrdude
 
+<div id="Linux"/>
+
 ## Linux
+
+<div id="avr8bitToolchain"/>
 
 ### AVR 8-Bit toolchain
 The AVR 8-Bit toolchain for linux can be downloaded from [microchips website](https://www.microchip.com/en-us/tools-resources/develop/microchip-studio/gcc-compilers). 
@@ -28,6 +44,8 @@ This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ```
 where `<VERSION>` is the version of avr-gcc.
+
+<div id="linuxAvrdude"/>
 
 ### avrdude
 Install avrdude with:
@@ -54,6 +72,8 @@ avrdude: no programmer has been specified on the command line or the config file
 ```
 where `<VERSION>` is the version of avrdude.
 
+<div id="Mac"/>
+
 ## Mac
 Download the AVR 8-Bit toolchain for mac from [microchips website](https://www.microchip.com/en-us/tools-resources/develop/microchip-studio/gcc-compilers)
 
@@ -61,7 +81,7 @@ Extract the downloaded tar.gz file and add `yourPath/avr8-gnu-toolchain-darwin_x
 
 Download avrdude [from gnu](http://download.savannah.gnu.org/releases/avrdude/), extract the tar.gz and add the bin directory to the `$path`.
 
-
+<div id="Windows"/>
 
 ## Windows
 For windows there is another dependency: msys2.
@@ -89,6 +109,7 @@ user@pcName MINGW64 ~
 $ pacman -S mingw-w64-x86_64-avrdude
 ```
 
+<div id="Usage"/>
 
 # Usage
 To make use of this make file system the project should have the following structure:
@@ -149,10 +170,12 @@ For more information run `make help`
 ```console
 foo@bar: ~/pathToProject/ $ make help
 ```
-
-# Known problems
+<div id="knownIssues"/>
+# Known issues
 
 Some known problems are described here. Some of these problems are not a problem with this tool but with the dependencies of this tool.
+
+<div id="knownIssuesATtiny"/>
 
 ## ATtiny
 Some ATtiny chips are not (yet) known by libc and require the downloading of extra files. These files can be found at [Microchips website](http://packs.download.atmel.com/).
