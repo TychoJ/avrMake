@@ -6,7 +6,8 @@ A make script to compile source code for avr microcontrollers and program avr mi
 	1. [Linux](#Linux)
 		1. [AVR 8-Bit toolchain](#avr8bitToolchain)
 		2. [avrdude](#linuxAvrdude)
-
+	2. [MAC](#Mac)
+	3. [Windows](#Windows)
 
 <div id="Installation"/>
 
@@ -68,6 +69,8 @@ avrdude: no programmer has been specified on the command line or the config file
 ```
 where `<VERSION>` is the version of avrdude.
 
+<div id="Mac"/>
+
 ## Mac
 Download the AVR 8-Bit toolchain for mac from [microchips website](https://www.microchip.com/en-us/tools-resources/develop/microchip-studio/gcc-compilers)
 
@@ -75,7 +78,7 @@ Extract the downloaded tar.gz file and add `yourPath/avr8-gnu-toolchain-darwin_x
 
 Download avrdude [from gnu](http://download.savannah.gnu.org/releases/avrdude/), extract the tar.gz and add the bin directory to the `$path`.
 
-
+<div id="Windows"/>
 
 ## Windows
 For windows there is another dependency: msys2.
