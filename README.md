@@ -11,7 +11,8 @@ A make script to compile source code for avr microcontrollers and program avr mi
 	3. [Windows](#Windows)
 2. [Usage](#Usage)
 3. [Known issues](#knownIssues)
-	1. [ATtiny](#knownIssuesATtiny)
+	1. [Install newest AVRDUDE version](#knownIssuesAVRdudeVersion)
+	2. [ATtiny](#knownIssuesATtiny)
 
 <div id="Installation"/>
 
@@ -23,17 +24,6 @@ To make use of these make files some dependencies must be installed first.
 * make
 
 <div id="Linux"/>
-
-## Installing the newest version of avrdude
-
-To install the newest version of avrdude you can go to the following link: [Avrdude Build/Installation Guide](https://github.com/avrdudes/avrdude/wiki/Building-AVRDUDE-for-Linux)
-This might be nessesary depending on your programmer, for MPLAB SNAP usage you'll have to visit the link and update your avrdude.
-After installation you'll need to restart your WSL by using in your PowerShell:
-```
-wsl --shutdown
-``` 
-After running the command you can start WSL again. 
-
 ## Linux
 
 <div id="avr8bitToolchain"/>
@@ -254,9 +244,22 @@ For more information run `make help`
 foo@bar: ~/pathToProject/ $ make help
 ```
 <div id="knownIssues"/>
+
 # Known issues
 
 Some known problems are described here. Some of these problems are not a problem with this tool but with the dependencies of this tool.
+
+<div id="knownIssuesAVRdudeVersion">
+
+## Installing the newest version of avrdude
+
+To install the newest version of avrdude you can go to the following link: [Avrdude Build/Installation Guide](https://github.com/avrdudes/avrdude/wiki/Building-AVRDUDE-for-Linux)
+This might be nessesary depending on your programmer, for MPLAB SNAP usage you'll have to visit the link and update your avrdude.
+After installation you'll need to restart your WSL by using in your PowerShell:
+```
+wsl --shutdown
+```
+After running the command you can start WSL again. 
 
 <div id="knownIssuesATtiny"/>
 
