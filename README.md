@@ -192,32 +192,6 @@ sudo service udev restart
 ```  
 This should complete the WSL installation and you can configure and use the Makefile. 
 
-## Windows without WSL
-For windows there is another dependency: msys2.
-
-To install msys go to the [msys2 websit](https://www.msys2.org/) and download the installer and use the installer to install msys2.
-
-Start the msys2 shell and run the following commands:
-```console
-user@pcName MINGW64 ~
-$ pacman -Syu
-
-user@pcName MINGW64 ~
-$ pacman -S --needed base-devel mingw-w64-x86_64-toolchain
-```
-
-Install the AVR 8-Bit toolchain in the msys2 shell
-```console
-user@pcName MINGW64 ~
-$ pacman -S mingw-w64-x86_64-avr-toolchain
-```
-
-Install avrdude in the msys2 shell
-```console
-user@pcName MINGW64 ~
-$ pacman -S mingw-w64-x86_64-avrdude
-```
-
 <div id="Usage"/>
 
 # Usage
