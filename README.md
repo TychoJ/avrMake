@@ -24,6 +24,16 @@ To make use of these make files some dependencies must be installed first.
 
 <div id="Linux"/>
 
+## Installing the newest version of avrdude
+
+To install the newest version of avrdude you can go to the following link: [Avrdude Build/Installation Guide](https://github.com/avrdudes/avrdude/wiki/Building-AVRDUDE-for-Linux)
+This might be nessesary depending on your programmer, for MPLAB SNAP usage you'll have to visit the link and update your avrdude.
+After installation you'll need to restart your WSL by using in your PowerShell:
+```
+wsl --shutdown
+``` 
+After running the command you can start WSL again. 
+
 ## Linux
 
 <div id="avr8bitToolchain"/>
@@ -107,7 +117,82 @@ Download avrdude [from gnu](http://download.savannah.gnu.org/releases/avrdude/),
 
 <div id="Windows"/>
 
-## Windows
+## Windows WSL (Windows Subsystem for Linux)
+
+For WSL of this AVR Makefile you'll need to be running WSL version 2 and a Windows 11 build 22000 or later. Windows 10 works, but is not fully supported by Microsoft.
+In this example we are using WSL2 with Ubuntu 22.04.02 LTS.
+
+To check your WSL version use the following command in PowerShell:
+```PowerShell
+wsl -l -v
+```
+To check your Windows version run the following command in PowerShell:
+```PowerShell
+Get-ComputerInfo | select OsBuildNumber
+```
+This will only show version 22000+ if you are on Windows 11. 
+
+### Adding USB support to WSL
+First we'll have to Install the USBIPD-WIN project to add support of USB devices to WSL.
+
+To do this you'll need to run Windows PowerShell (As Administrator), in Windows PowerShell you can run the following command:
+```PowerShell
+winget install --interactive --exact dorssel.usbipd-win
+```
+This will install USBIPD on your windows machine.
+If you leave out --interactive, winget may immediately restart your computer if that is required to install the drivers. After installation you'll have to restart your device for USBIPD to work. 
+
+Run the following commands to add USBIP tools and hardware database in WSL:
+```bash
+sudo apt install linux-tools-generic hwdata
+```
+```bash
+sudo update-alternatives --install /usr/local/bin/usbip usbip /usr/lib/linux-tools/*-generic/usbip 20
+```
+
+
+You can use the following command in PowerShell (As Administrator) to see a list of connected devices:
+```PowerShell
+usbipd wsl list
+```
+This will show you all connected USB devices and their Bus ID's. You can use these ID's to attach a USB port to your WSL using this command:
+```PowerShell
+usbipd wsl attach --busid <busid>
+```
+Please note that WSL should be running for this command to work.
+You'll have to use this command every time you restart WSL or replug your programmer.     
+To confirm the the device is now attached in linux you can run the following command on Windows: 
+```PowerShell 
+usbipd wsl list
+```
+and/or the following command within WSL:
+```
+lsusb
+```
+
+More in depth USB WSL tutorial can be found on the official Microsoft website: [Connect USB devices WSL](https://learn.microsoft.com/en-us/windows/wsl/connect-usb)  
+
+#### Programming with WSL problems
+
+Sadly if you try and use the makefile after following the steps found in ``Adding USB support to WSL``, avrdude will give you an error. To fix this you'll have to do a few extra steps.   
+Start with creating a new udev rule by running:
+```bash
+sudo nano /etc/udev/rules.d/10-local.rules
+```
+Paste the following line in the created file:
+```bash
+SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", IMPORT{builtin}="usb_id", IMPORT{builtin}="hwdb --subsystem=usb", MODE="0666"
+```
+
+This ensures that a normal (non-root) user can use the USB.
+
+After creating the file you can restart the udev service with:
+```bash
+sudo service udev restart
+```  
+This should complete the WSL installation and you can configure and use the Makefile. 
+
+## Windows without WSL
 For windows there is another dependency: msys2.
 
 To install msys go to the [msys2 websit](https://www.msys2.org/) and download the installer and use the installer to install msys2.

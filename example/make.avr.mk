@@ -1,28 +1,28 @@
 # make.avr.mk
 # ^^^^^^^^^^^^^^^^^
-# Author  : TychoJ
-# Version : 0.1
-# 
-# Inspired by : Edwin Boer
+# Author  	: TychoJ
+# Version 	: 0.1
 #
-# File		: make.avr.mk
-# Contains  : The make process for building/flashing/debuging of AVR microcontrollers
-#			  The settings for this make file can be found in: Makefile
+# Inspired by 	: Edwin Boer
+#
+# File	 	: make.avr.mk
+# Contains  	: The make process for building/flashing/debuging of AVR microcontrollers
+#		  The settings for this make file can be found in: Makefile
 
 # MIT License
-# 
+#
 # Copyright (c) 20223 TychoJ
-# 
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
-# 
+#
 # The above copyright notice and this permission notice shall be included in all
 # copies or substantial portions of the Software.
-# 
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -68,7 +68,7 @@ _start:
 	@echo "#################################"
 	@echo "  > Start: make.avr.mk"
 
-_help1: 
+_help1:
 	@echo "_________________________________"
 	@echo "  > Possible options:"
 	@echo "    make        		:= Show this help message."
@@ -81,7 +81,7 @@ _help1:
 	@echo "    make disasm 		:= Disassemble the code for debugging."
 	@echo "    make clean  		:= Delete all generated .hex, .elf, and .o files."
 	@echo "	   make distclean 	:= Delete all generated .hex, .elf and .o files as wel as the $(BINFOLDER) and the $(OBJFOLDER) folders."
-	
+
 _end:
 	@echo
 	@echo "#################################"
@@ -91,7 +91,7 @@ _end:
 # Goal: make all
 all: _start _all1 $(BINFOLDER)$(PROJECTNAME).hex _end
 
-_all1: 
+_all1:
 	@echo "  > Goal: Compile and link the source code."
 	@echo "  > Object folder: $(OBJFOLDER)"
 	@echo "  > Binary folder: $(BINFOLDER)"
@@ -101,12 +101,12 @@ _all1:
 # Goal: make flash
 flash: _start _flash1 $(BINFOLDER)$(PROJECTNAME).hex _flash2 _end
 
-_flash1: 
+_flash1:
 	@echo "  > Goal: Compile and link the source code and write the compiled hex-file to the flash memory of the microcontroller."
 	@echo "  > binaray folder: $(BINFOLDER)"
 	@mkdir -p $(BINFOLDER)
 
-_flash2: 
+_flash2:
 	@echo "_________________________________"
 	@echo " > Start flash"
 	$(TOOLDUDE) -e -U flash:w:$(BINFOLDER)$(PROJECTNAME).hex
@@ -128,7 +128,7 @@ _fuse1:
 # Goal: make disasm
 disasm: _start _disasm1 $(BINFOLDER)/$(PROJECTNAME).elf _disasm2 _end
 
-_disasm1: 
+_disasm1:
 	@echo	"  > Goal: Disassemble the code for debugging."
 
 _disasm2: $(BINFOLDER)/$(PROJECTNAME).elf
@@ -139,7 +139,7 @@ clean: _start _clean _end
 
 _clean:
 	@echo "  > Goal: Delete all generated .hex, .elf, and .o files."
-	rm -f    $(BINFOLDER)$(PROJECTNAME).hex 
+	rm -f    $(BINFOLDER)$(PROJECTNAME).hex
 	rm -f    $(BINFOLDER)$(PROJECTNAME).elf
 	rm -f -r $(OBJFOLDER)$(SRCFOLDER)
 
@@ -147,7 +147,7 @@ distclean: _start _distclean _end
 
 _distclean:
 	@echo "  > Goal: Delete all generated .hex, .elf and .o files as wel as the $(BINFOLDER) and the $(OBJFOLDER) folders."
-	rm -f    $(BINFOLDER)$(PROJECTNAME).hex 
+	rm -f    $(BINFOLDER)$(PROJECTNAME).hex
 	rm -f    $(BINFOLDER)$(PROJECTNAME).elf
 	rm -f -r $(OBJFOLDER)$(SRCFOLDER)
 	rm -r 	 $(OBJFOLDER)
@@ -177,4 +177,4 @@ _compiler:
 %.o: %.c
 	@mkdir -p $(OBJFOLDER)$(dir $@)
 	@echo "test"
-	$(TOOLC) $(INCLUDELIST) -c -o $(OBJFOLDER)$@ $< 
+	$(TOOLC) $(INCLUDELIST) -c -o $(OBJFOLDER)$@ $<
