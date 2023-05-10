@@ -1,12 +1,28 @@
 # avrMake
 A make script to compile source code for avr microcontrollers and program avr microcontrollers
 
+# Table of contents
+1. [Installation](#Installation)
+	1. [Linux](#Linux)
+		1. [AVR 8-Bit toolchain](#avr8bitToolchain)
+		2. [avrdude](#linuxAvrdude)
+		3. [make](#linuxMake)
+	2. [MAC](#Mac)
+	3. [Windows](#Windows)
+2. [Usage](#Usage)
+3. [Known issues](#knownIssues)
+	1. [ATtiny](#knownIssuesATtiny)
+
+<div id="Installation"/>
 
 # Installation
 To make use of these make files some dependencies must be installed first.
 
 * AVR 8-Bit toolchain
 * avrdude
+* make
+
+<div id="Linux"/>
 
 ## Installing the newest version of avrdude
 
@@ -19,15 +35,78 @@ wsl --shutdown
 After running the command you can start WSL again. 
 
 ## Linux
-Download the AVR 8-Bit toolchain for linux from [microchips website](https://www.microchip.com/en-us/tools-resources/develop/microchip-studio/gcc-compilers)
 
-Extract the downloaded tar.gz file and add `avr8-gnu-toolchain-linux_x86_64/bin` to the system `$PATH` variable.
+<div id="avr8bitToolchain"/>
 
-Download avrdude
+### AVR 8-Bit toolchain
+The AVR 8-Bit toolchain for linux can be downloaded from [microchips website](https://www.microchip.com/en-us/tools-resources/develop/microchip-studio/gcc-compilers). 
+The downloaded file is a tar.gz file containing the AVR 8-Bit toolchain. </br>
+Extract the downloaded tar.gz file and place `avr8-gnu-toolchain-linux_x86_64/` in the  `/opt/` directory. </br>
+Now add `/opt/avr8-gnu-toolchain-linux_x86_64/bin` to the system `$PATH` variable.
+
+To check if the toolchain is installed correct run:
 ```console
-foo@bar: sudo apt install avrdude
+foo@bar: ~ $ avr-gcc --version
 ```
+This should output the following:
+```console
+avr-gcc (GCC) <VERSION>
+Copyright (C) 2015 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+```
+where `<VERSION>` is the version of avr-gcc.
 
+<div id="linuxAvrdude"/>
+
+### avrdude
+Install avrdude with:
+```console
+foo@bar: ~ $ sudo apt install avrdude
+```
+To check if avrdude is installed correctly run:
+```console
+foo@bar: ~ $ avrdude -v
+```
+This should output the following
+```console
+avrdude: Version <VERSION>
+         Copyright (c) 2000-2005 Brian Dean, http://www.bdmicro.com/
+         Copyright (c) 2007-2014 Joerg Wunsch
+
+         System wide configuration file is "/etc/avrdude.conf"
+         User configuration file is "/home/tychoj/.avrduderc"
+         User configuration file does not exist or is not a regular file, skipping
+
+
+avrdude: no programmer has been specified on the command line or the config file
+         Specify a programmer using the -c option and try again
+```
+where `<VERSION>` is the version of avrdude.
+
+<div id="linuxMake"/>
+
+### make
+Install make with:
+```console
+foo@bar: ~ $ sudo apt install make
+```
+To check if make is installed correctly run:
+```console
+foo@bar: ~ $ make --version
+```
+This should output the following:
+```console
+GNU Make <VERSION>
+Built for x86_64-pc-linux-gnu
+Copyright (C) 1988-2020 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+```
+Where `<VERSION> is the version of make.
+
+<div id="Mac"/>
 
 ## Mac
 Download the AVR 8-Bit toolchain for mac from [microchips website](https://www.microchip.com/en-us/tools-resources/develop/microchip-studio/gcc-compilers)
@@ -35,6 +114,8 @@ Download the AVR 8-Bit toolchain for mac from [microchips website](https://www.m
 Extract the downloaded tar.gz file and add `yourPath/avr8-gnu-toolchain-darwin_x86_64/bin` to the system `$PATH`
 
 Download avrdude [from gnu](http://download.savannah.gnu.org/releases/avrdude/), extract the tar.gz and add the bin directory to the `$path`.
+
+<div id="Windows"/>
 
 ## Windows WSL (Windows Subsystem for Linux)
 
@@ -111,7 +192,6 @@ sudo service udev restart
 ```  
 This should complete the WSL installation and you can configure and use the Makefile. 
 
-
 ## Windows without WSL
 For windows there is another dependency: msys2.
 
@@ -138,6 +218,7 @@ user@pcName MINGW64 ~
 $ pacman -S mingw-w64-x86_64-avrdude
 ```
 
+<div id="Usage"/>
 
 # Usage
 To make use of this make file system the project should have the following structure:
@@ -198,3 +279,58 @@ For more information run `make help`
 ```console
 foo@bar: ~/pathToProject/ $ make help
 ```
+<div id="knownIssues"/>
+# Known issues
+
+Some known problems are described here. Some of these problems are not a problem with this tool but with the dependencies of this tool.
+
+<div id="knownIssuesATtiny"/>
+
+## ATtiny
+Some ATtiny chips are not (yet) known by libc and require the downloading of extra files. These files can be found at [Microchips website](http://packs.download.atmel.com/).
+Download the `Atmel ATtiny Series Device Support` file is a zip file eventhough it has the file extension `.atpack`.
+
+Make a temporary folder in which the `Atmel.ATtiny_DFP.2.0.368.atpack` zip archive can be extracted. and run the following commands 
+(These are the commands on linux for when `avr8-gnu-toolchain-linux_x86_64/` is installed in the `/opt/` directory)
+```console
+foo@bar: ~/Downloads/tmp/ $ sudo cp include/avr/iotn?*1[2467].h /opt/avr8-gnu-toolchain-linux_x86_64/avr/include/avr/
+
+foo@bar: ~/Downloads/tmp/ $ sudo cp gcc/dev/attiny?*1[2467]/avrxmega3/*.{o,a} /opt/avr8-gnu-toolchain-linux_x86_64/avr/lib/avrxmega3/
+
+foo@bar: ~/Downloads/tmp/ $ sudo cp gcc/dev/attiny?*1[2467]/avrxmega3/short-calls/*.{o,a} /opt/avr8-gnu-toolchain-linux_x86_64/avr/lib/avrxmega3/short-calls/
+```
+At last `/opt/avr8-gnu-toolchain-linux_x86_64/avr/include/avr/io.h` add the following:
+```c
+#elif defined (__AVR_ATtiny212__)
+#  include <avr/iotn212.h>
+#elif defined (__AVR_ATtiny412__)
+#  include <avr/iotn412.h>
+#elif defined (__AVR_ATtiny214__)
+#  include <avr/iotn214.h>
+#elif defined (__AVR_ATtiny414__)
+#  include <avr/iotn414.h>
+#elif defined (__AVR_ATtiny814__)
+#  include <avr/iotn814.h>
+#elif defined (__AVR_ATtiny1614__)
+#  include <avr/iotn1614.h>
+#elif defined (__AVR_ATtiny3214__)
+#  include <avr/iotn3214.h>
+#elif defined (__AVR_ATtiny416__)
+#  include <avr/iotn416.h>
+#elif defined (__AVR_ATtiny816__)
+#  include <avr/iotn816.h>
+#elif defined (__AVR_ATtiny1616__)
+#  include <avr/iotn1616.h>
+#elif defined (__AVR_ATtiny3216__)
+#  include <avr/iotn3216.h>
+#elif defined (__AVR_ATtiny417__)
+#  include <avr/iotn417.h>
+#elif defined (__AVR_ATtiny817__)
+#  include <avr/iotn817.h>
+#elif defined (__AVR_ATtiny1617__)
+#  include <avr/iotn1617.h>
+#elif defined (__AVR_ATtiny3217__)
+#  include <avr/iotn3217.h>
+```
+
+A big thank you goes to LeoNerd who wrote [this article](http://leonerds-code.blogspot.com/2019/06/building-for-new-attiny-1-series-chips.html) on how to add ATtiny support.
