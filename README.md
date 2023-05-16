@@ -24,6 +24,7 @@ To make use of these make files some dependencies must be installed first.
 * make
 
 <div id="Linux"/>
+
 ## Linux
 
 <div id="avr8bitToolchain"/>
