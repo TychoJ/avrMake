@@ -52,7 +52,7 @@ MICROCONTROLLER = atxmega256a3u
 # atmelice_isp	  Atmel-ICE (ARM/AVR) in ISP mode
 # atmelice_pdi	  Atmel-ICE (ARM/AVR) in PDI mode
 # atmelice_updi   Atmel-ICE (ARM/AVR) in UPDI mode
-PROGRAMMER = atmelice_isp
+PROGRAMMER = avrisp2
 # The (optional) port of the avr programmer (usb, /dev/tty.#)
 # PORT = usb
 # The fuse values: low, high and extended
