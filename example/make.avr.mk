@@ -50,7 +50,7 @@ OBJLIST2    := $(foreach file, $(OBJLIST), $(OBJFOLDER)$(file))
 # Define all tools with standard settings
 TOOLC     = $(AVRFOLDER)avr-gcc $(CFLAGS) -Os -mmcu=$(MICROCONTROLLER)
 TOOLCOPY  = $(AVRFOLDER)avr-objcopy
-TOOLSIZE  = $(AVRFOLDER)avr-size --format=avr --mcu=$(MICROCONTROLLER)
+TOOLSIZE  = $(AVRFOLDER)avr-objdump -Pmem-usage
 TOOLDUMP  = $(AVRFOLDER)avr-objdump
 ifdef PORT
  TOOLDUDE = $(DUDEFOLDER)avrdude -c $(PROGRAMMER) -p $(MICROCONTROLLER) -P $(PORT)
