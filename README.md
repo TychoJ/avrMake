@@ -244,6 +244,7 @@ For more information run `make help`
 ```console
 foo@bar: ~/pathToProject/ $ make help
 ```
+
 <div id="knownIssues"/>
 
 # Known issues
@@ -312,3 +313,24 @@ At last `/opt/avr8-gnu-toolchain-linux_x86_64/avr/include/avr/io.h` add the foll
 ```
 
 A big thank you goes to LeoNerd who wrote [this article](http://leonerds-code.blogspot.com/2019/06/building-for-new-attiny-1-series-chips.html) on how to add ATtiny support.
+
+
+<div id="floats">
+
+## Prining floats
+To keep the compiled binaries small the standard linking process doesn't implement a method for printing floats. Instead of printing the float variable value question marks will be printed. If for the developement it is necessairy to print floats the linker needs to be told to use the floating point version of the printf function implementations. Appart from telling the linker to use the printf functions the linker also needs to be told that these implementations can be found in the library `printf_flt`. 
+
+Telling the linker to use the floating point versions of the printf functions and to link with the `printf_flt` library the following compiler options can be used:
+```console
+-Wl,-u,vfprintf -lprintf_flt
+```
+These options can be enabled by uncommenting a line in the make script to go from:
+```Make
+# Uncomment the next line if floating points need to be printed
+# CFLAGS += -Wl,-u,vfprintf -lprintf_flt 
+```
+to:
+```Make
+# Uncomment the next line if floating points need to be printed
+CFLAGS += -Wl,-u,vfprintf -lprintf_flt 
+```
