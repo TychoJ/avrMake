@@ -65,5 +65,8 @@ EXTFOLDER =
 # Compiler flags
 CFLAGS = -Wall
 
+# Uncomment the next line if floating points need to be printed
+# CFLAGS += -Wl,-u,vfprintf -lprintf_flt 
+
 # Execute the configurations
 include make.avr.mk
